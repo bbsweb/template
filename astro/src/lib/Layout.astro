@@ -1,0 +1,184 @@
+---
+import { Image } from "astro:assets"
+import Theme from "./theme.astro"
+
+import "./i.css"
+
+type Props = {
+  title?: string
+  description?: string
+}
+
+const { title, description } = Astro.props
+---
+
+<!doctype html>
+<html lang="zh" data-theme="auto">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+  </head>
+  <body>
+    <header class="head">
+      <Image src="/favicon.svg" alt="logo" width={50} height={50} />
+      <Theme />
+    </header>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  /* 消除浏览器差异 */
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    color-scheme: light;
+    --bg: #fff; /* 背景色 */
+    --fg: #333; /* 前景色 */
+    --main: #3f9cec; /* 主色 */
+  }
+
+  @media (prefers-color-scheme: dark) {
+    html[data-theme="auto"] {
+      color-scheme: dark;
+      --bg: #333;
+      --fg: #fff;
+      --main: #8fcbff; /* 主色 */
+    }
+
+    /* 代码块黑暗模式 */
+    [data-theme="auto"] .astro-code,
+    [data-theme="auto"] .astro-code span {
+      color: var(--shiki-dark) !important;
+      background-color: var(--shiki-dark-bg) !important;
+      font-style: var(--shiki-dark-font-style) !important;
+      font-weight: var(--shiki-dark-font-weight) !important;
+      text-decoration: var(--shiki-dark-text-decoration) !important;
+    }
+  }
+
+  html[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #333;
+    --fg: #fff;
+    --main: #8fcbff;
+  }
+
+  /* 代码块黑暗模式 */
+  [data-theme="dark"] .astro-code,
+  [data-theme="dark"] .astro-code span {
+    color: var(--shiki-dark) !important;
+    background-color: var(--shiki-dark-bg) !important;
+    font-style: var(--shiki-dark-font-style) !important;
+    font-weight: var(--shiki-dark-font-weight) !important;
+    text-decoration: var(--shiki-dark-text-decoration) !important;
+  }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    transition:
+      background 0.5s,
+      color 0.5s;
+  }
+
+  .head {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    max-width: 1024px;
+    margin: auto;
+    padding: 16px;
+  }
+
+  /* markdown 容器 */
+  .md {
+    display: flex;
+    flex-direction: column;
+    max-width: 1024px;
+    margin: auto;
+    padding: 16px;
+  }
+
+  /* 超链接 */
+  .md a {
+    color: var(--main);
+  }
+
+  /* 引用 */
+  .md blockquote {
+    margin: 0;
+    padding: 0 8px;
+    border-left: 8px solid var(--main);
+  }
+
+  /* 分割线 */
+  .md hr {
+    width: 100%;
+    height: 4px;
+    border: none;
+    border-radius: 4px;
+    background: var(--main);
+  }
+
+  /* 行内代码 */
+  .md code:not(pre code) {
+    padding: 4px;
+    border: 1px solid var(--main);
+    border-radius: 4px;
+    vertical-align: 2px; /* 和同一行字体平齐 */
+  }
+
+  /* 代码块 */
+  .md > pre {
+    padding: 8px;
+    border: 2px solid var(--main);
+    border-radius: 4px;
+    font-size: 18px;
+  }
+
+  /* 表格 */
+  .md > table {
+    border: 2px solid var(--main);
+    border-collapse: collapse;
+  }
+
+  .md > table th,
+  .md > table td {
+    padding: 8px;
+    border: 1px solid var(--main);
+  }
+
+  /* 任务列表 */
+  .md .contains-task-list {
+    padding-left: 16px;
+    list-style: none;
+  }
+</style>
+
+<script is:inline>
+  const theme = localStorage.getItem("theme")
+  switch (theme) {
+    case "light":
+      document.documentElement.setAttribute("data-theme", "light")
+      document.getElementById("t-light").checked = true
+      break
+    case "dark":
+      document.documentElement.setAttribute("data-theme", "dark")
+      document.getElementById("t-dark").checked = true
+      break
+    case "auto":
+    default:
+      document.documentElement.setAttribute("data-theme", "auto")
+      document.getElementById("t-auto").checked = true
+      break
+  }
+</script>

@@ -1,0 +1,30 @@
+{
+  "name": "template_astro",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "devDependencies": {
+    "@astrojs/cloudflare": "latest",
+    "@astrojs/mdx": "latest",
+    "@astrojs/react": "latest",
+    "@codesandbox/sandpack-react": "latest",
+    "@types/node": "latest",
+    "asciinema-player": "latest",
+    "astro": "latest",
+    "eslint-config-prettier": "latest",
+    "eslint-plugin-astro": "latest",
+    "eslint-plugin-prettier": "latest",
+    "prettier-plugin-astro": "latest",
+    "rehype-katex": "latest",
+    "remark-math": "latest",
+    "typescript-eslint": "latest"
+  },
+  "prettier": {
+    "plugins": [
+      "prettier-plugin-astro"
+    ]
+  }
+}

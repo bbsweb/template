@@ -1,0 +1,51 @@
+---
+import { getLiveEntry, render } from "astro:content"
+import Layout from "../../lib/Layout.astro"
+
+import "katex/dist/katex.min.css"
+
+const { id } = Astro.params
+const { entry, error } = await getLiveEntry("post", id!)
+if (!entry || error) return Astro.rewrite("/404")
+
+const fmt = new Intl.DateTimeFormat("zh-CN", {
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit"
+})
+
+const { title, excerpt, updated } = entry.data
+const updatedDate = new Date(updated * 1000)
+const updatedISO = updatedDate.toISOString()
+const updatedText = fmt.format(updatedDate)
+
+const { Content } = await render(entry)
+
+Astro.cache.set({
+  maxAge: 3600, // 缓存1小时
+  swr: 1800,
+  tags: [`post/${id}`]
+})
+---
+
+<Layout title={title} description={excerpt}>
+  <article class="md">
+    <h1 class="title">{title}</h1>
+    <time class="time" datetime={updatedISO}>
+      <span class="i-time"></span>{updatedText}
+    </time>
+    <Content />
+  </article>
+</Layout>
+
+<style>
+  .title {
+    margin: 0;
+  }
+
+  .time {
+    margin-bottom: 16px;
+    font-size: 90%;
+    opacity: 0.6;
+  }
+</style>
