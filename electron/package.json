@@ -1,0 +1,26 @@
+{
+  "name": "template",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev:vite": "vite",
+    "dev:electron": "tsc -p tsconfig.main.json && electron .",
+    "dev": "node ./dev.mts",
+    "build": "vite build && tsc -b && node ./build.mts"
+  },
+  "devDependencies": {
+    "@electron/packager": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "@typescript-eslint/eslint-plugin": "latest",
+    "@vitejs/plugin-react": "latest",
+    "babel-plugin-react-compiler": "latest",
+    "electron": "^38",
+    "eslint": "latest",
+    "eslint-config-prettier": "latest",
+    "eslint-plugin-prettier": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "vite": "latest"
+  }
+}
