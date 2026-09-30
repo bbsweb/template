@@ -1,0 +1,5 @@
+scrapy==2.15.2
+aiohttp==3.13.5
+motor==3.7.1 # mongo 数据库
+pillow==12.2.0 # 图像处理
+scrapy-playwright==0.0.46
