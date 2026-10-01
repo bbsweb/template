@@ -1,0 +1,24 @@
+{
+  "name": "tauri-app",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "tauri": "tauri"
+  },
+  "devDependencies": {
+    "@eslint/js": "latest",
+    "@swc/html": "latest",
+    "@tauri-apps/api": "latest",
+    "@tauri-apps/cli": "latest",
+    "@types/node": "latest",
+    "eslint": "latest",
+    "eslint-config-prettier": "latest",
+    "eslint-plugin-prettier": "latest",
+    "typescript-eslint": "latest",
+    "vite": "latest"
+  }
+}
